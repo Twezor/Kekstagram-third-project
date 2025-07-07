@@ -6,9 +6,9 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 
 const miniatures = document.createDocumentFragment();
 
-const createMiniatures = function(array) {
+const createMiniatures = (picturesData) => {
   document.querySelector('.img-filters').classList.remove('img-filters--inactive');
-  array.forEach(({id, url, description, likes, comments}) => {
+  picturesData.forEach(({id, url, description, likes, comments}) => {
     const minature = pictureTemplate.cloneNode(true);
     minature.querySelector('.picture__img').src = url;
     minature.querySelector('.picture__img').alt = description;
@@ -26,7 +26,7 @@ const createMiniatures = function(array) {
 
     if (currentDomPictureElement) {
       evt.preventDefault();
-      const currentPicture = array.find((picture) => picture.id === Number(currentDomPictureElement.dataset.pictureId));
+      const currentPicture = picturesData.find((picture) => picture.id === Number(currentDomPictureElement.dataset.pictureId));
       renderBigPicture(currentPicture);
       document.addEventListener('keydown', onModalEscapeKeywdown);
       bigPicture.classList.remove('hidden');

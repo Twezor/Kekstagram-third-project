@@ -40,17 +40,14 @@ function getNumber(anyString) {
 
 getNumber('2023 год');
 
-const strokeTimeToMinutes = (timeInArray) => timeInArray[0] * 60 + Number(timeInArray[1]);
+const strokeTimeToMinutes = (timeValues) => timeValues[0] * 60 + Number(timeValues[1]);
 
-const meetingIsReally = (workingTimeStart, workingTimeEnd, meetingTimeStart, meetingDuration) => {
+const getMeetingIsReally = (workingTimeStart, workingTimeEnd, meetingTimeStart, meetingDuration) => {
   const workingTimeStartInMinutes = strokeTimeToMinutes(workingTimeStart.split(':'));
   const workingTimeEndInMinutes = strokeTimeToMinutes(workingTimeEnd.split(':'));
   const meetingTimeStartInMinutes = strokeTimeToMinutes(meetingTimeStart.split(':'));
 
-  if (workingTimeStartInMinutes <= meetingTimeStartInMinutes && workingTimeEndInMinutes >= (meetingTimeStartInMinutes + meetingDuration)) {
-    return true;
-  }
-  return false;
+  return workingTimeStartInMinutes <= meetingTimeStartInMinutes && workingTimeEndInMinutes >= (meetingTimeStartInMinutes + meetingDuration);
 };
 
-meetingIsReally('08:00', '17:30', '14:00', 90);
+getMeetingIsReally('08:00', '17:30', '14:00', 90);

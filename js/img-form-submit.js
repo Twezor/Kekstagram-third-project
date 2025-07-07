@@ -42,7 +42,7 @@ function showSuccessMessage() {
     }
   };
 
-  const closeSuccessMessageOutArea = function (evt) {
+  const onOutsideSuccessMessageClick = function (evt) {
     if (!successInner.contains(evt.target)) {
       successContainer.remove();
     }
@@ -53,7 +53,7 @@ function showSuccessMessage() {
   });
 
   document.addEventListener('keydown', onSuccessMessageEscapeKeydown);
-  document.addEventListener('click', closeSuccessMessageOutArea);
+  document.addEventListener('click', onOutsideSuccessMessageClick);
 }
 
 function showErrorMessage(){
@@ -64,21 +64,21 @@ function showErrorMessage(){
   const errorButton = errorContainer.querySelector('.error__button');
   const errorInner = errorContainer.querySelector('.error__inner');
 
-  function onErrorMessageEscapeKeydown (evt) {
+  function onEscapeKeydown (evt) {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
       evt.stopPropagation();
       errorContainer.remove();
-      document.body.removeEventListener('keydown', onErrorMessageEscapeKeydown);
-      document.removeEventListener('click', closeErrorMessageOutArea);
+      document.body.removeEventListener('keydown', onEscapeKeydown);
+      document.removeEventListener('click', onOutsideErrorMessageClick);
     }
   }
 
-  function closeErrorMessageOutArea (evt) {
+  function onOutsideErrorMessageClick (evt) {
     if (!errorInner.contains(evt.target)) {
       errorContainer.remove();
-      document.body.removeEventListener('keydown', onErrorMessageEscapeKeydown);
-      document.removeEventListener('click', closeErrorMessageOutArea);
+      document.body.removeEventListener('keydown', onEscapeKeydown);
+      document.removeEventListener('click', onOutsideErrorMessageClick);
     }
   }
 
@@ -86,8 +86,8 @@ function showErrorMessage(){
     errorContainer.remove();
   });
 
-  document.body.addEventListener('keydown', onErrorMessageEscapeKeydown);
-  document.addEventListener('click', closeErrorMessageOutArea);
+  document.body.addEventListener('keydown', onEscapeKeydown);
+  document.addEventListener('click', onOutsideErrorMessageClick);
 }
 
 imgUploadForm.addEventListener('submit', (evt) => {

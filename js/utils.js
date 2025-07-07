@@ -7,7 +7,7 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-const getRandomArrayElement = (array) => array[getRandomInteger(0, array.length - 1)];
+const getRandomArrayElement = (items) => items[getRandomInteger(0, items.length - 1)];
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
